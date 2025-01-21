@@ -1,3 +1,6 @@
+![image alt](https://github.com/MrReaper781/Simple-Chat-application/blob/ea2ae14ae9b1b4562cac33a323992c5c7d217918/Screenshot%202025-01-21%20120821.png)
+
+
 Project Name: Chat Manager Application
 
 Description:
