@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        button {
+            display: inline-block;
+            font-size: 14px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .chat {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        .chat i {
+            color: #007bff;
+            font-style: normal;
+        }
+
+        .msg {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .msg span {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .edel {
+            margin-top: 10px;
+        }
+
+        .edel button {
+            margin-right: 5px;
+            background-color: transparent;
+            color: #007bff;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .edel button:hover {
+            color: #0056b3;
+        }
+
+        .edel i {
+            margin: 0;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .chat {
+                padding: 15px;
+            }
+
+            .edel button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>All Chats</h2>
+
+    <form action="/chats/new" method="get" class="text-center mb-4">
+        <button class="btn btn-primary">New Chat</button>
+    </form>
+
+    <% for (let chat of chats) { %>
+        <div class="chat">
+            <div>
+                <strong>From:</strong> <i>
+                    <%= chat.from %>
+                </i>
+            </div>
+            <div class="msg">
+                <strong>Message:</strong>
+                <span>
+                    <%= chat.msg %>
+                </span>
+                <div class="edel">
+                    <form action="/chats/<%= chat.id %>/edit" method="get" style="display: inline;">
+                        <button title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </form>
+                    <form action="/chats/<%= chat.id %>/?_method=Delete" method="post" style="display: inline;">
+                        <button title="Delete"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <strong>Received by:</strong> <i>
+                    <%= chat.to %>
+                </i>
+            </div>
+            <div class="mt-2">
+                <strong>Time:</strong>
+                <%= chat.created_at.toString().split(" ")[4] %>
+            </div>
+            <div>
+                <strong>Date:</strong> <%= chat.created_at.toString().split(" ").splice(0, 4).join(" ") %>
+            </div>
+        </div>
+    <% } %>
+
+    <!-- Bootstrap JS -->
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
+    </script>
+</body>
+
+</html>
